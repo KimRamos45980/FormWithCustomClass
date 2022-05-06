@@ -2,6 +2,7 @@ class VideoGame {
     title:string;
     price:number;
     rating:string;
+    system:string;
     isDigitalOnly:boolean;
 }
 
@@ -46,6 +47,9 @@ function getVideoGame():VideoGame {
     let ratingInput = <HTMLSelectElement> getById("rating");
     game.rating = ratingInput.value;
 
+    let systemInput = <HTMLInputElement> getById("system");
+    game.system = systemInput.value;
+
     let digitalOnly = <HTMLInputElement> getById("online");
     game.isDigitalOnly = digitalOnly.checked;
     /*
@@ -83,7 +87,8 @@ function displayGame(myGame:VideoGame):void {
 
     gameInfo.innerText = `${myGame.title} has a rating of ` + 
                          `${myGame.rating}. It costs $` +
-                         `${myGame.price.toFixed(2)}. ${gameMediaDisplay}`;
+                         `${myGame.price.toFixed(2)}. ${gameMediaDisplay}` +
+                         ` The game can be played on ${myGame.system}`;
 
     // Add <h2> in the <div id="display">
     displayDiv.appendChild(gameHeading);
@@ -121,6 +126,9 @@ function isInputPresent(): boolean {
     let ratingInput = <HTMLSelectElement> getById("rating");
     let ratingValue = ratingInput.value;
 
+    let systemInput = <HTMLInputElement> getById("price");
+    let systemValue = systemInput.value;
+
     let errorList = getById("errors");
     if (titleValue == "") {
         let titleMissing = document.createTextNode("Please enter a title");
@@ -137,6 +145,12 @@ function isInputPresent(): boolean {
     if (ratingValue == "Please choose a rating") {
         let ratingMissing = document.createTextNode("Please select a rating");
         errorList.appendChild(ratingMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+    if (systemValue == "") {
+        let systemMissing = document.createTextNode("Please enter a system the game can be played on");
+        errorList.appendChild(systemMissing);
         errorList.appendChild(addBreak());
         textPresent = false;
     }
@@ -179,6 +193,9 @@ function resetGameInfo() {
 
     let ratingInput = <HTMLSelectElement> getById("rating");
     ratingInput.selectedIndex = 0;
+
+    let systemInput = <HTMLInputElement> getById("system");
+    systemInput.value= "";
 
     let digitalOnly = <HTMLInputElement> getById("online");
     digitalOnly.checked = false;

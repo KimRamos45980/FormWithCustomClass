@@ -24,6 +24,8 @@ function getVideoGame() {
     game.price = parseFloat(priceInput.value);
     var ratingInput = getById("rating");
     game.rating = ratingInput.value;
+    var systemInput = getById("system");
+    game.system = systemInput.value;
     var digitalOnly = getById("online");
     game.isDigitalOnly = digitalOnly.checked;
     console.log(game);
@@ -46,7 +48,8 @@ function displayGame(myGame) {
     }
     gameInfo.innerText = "".concat(myGame.title, " has a rating of ") +
         "".concat(myGame.rating, ". It costs $") +
-        "".concat(myGame.price.toFixed(2), ". ").concat(gameMediaDisplay);
+        "".concat(myGame.price.toFixed(2), ". ").concat(gameMediaDisplay) +
+        " The game can be played on ".concat(myGame.system);
     displayDiv.appendChild(gameHeading);
     displayDiv.appendChild(gameInfo);
 }
@@ -67,6 +70,8 @@ function isInputPresent() {
     var priceValue = priceInput.value;
     var ratingInput = getById("rating");
     var ratingValue = ratingInput.value;
+    var systemInput = getById("price");
+    var systemValue = systemInput.value;
     var errorList = getById("errors");
     if (titleValue == "") {
         var titleMissing = document.createTextNode("Please enter a title");
@@ -83,6 +88,12 @@ function isInputPresent() {
     if (ratingValue == "Please choose a rating") {
         var ratingMissing = document.createTextNode("Please select a rating");
         errorList.appendChild(ratingMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+    if (systemValue == "") {
+        var systemMissing = document.createTextNode("Please enter a system the game can be played on");
+        errorList.appendChild(systemMissing);
         errorList.appendChild(addBreak());
         textPresent = false;
     }
@@ -112,6 +123,8 @@ function resetGameInfo() {
     priceInput.value = "";
     var ratingInput = getById("rating");
     ratingInput.selectedIndex = 0;
+    var systemInput = getById("system");
+    systemInput.value = "";
     var digitalOnly = getById("online");
     digitalOnly.checked = false;
 }
