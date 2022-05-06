@@ -25,6 +25,7 @@ function addVideoGame() {
     if(isAllDataValid()) {
         let game = getVideoGame();
         displayGame(game);
+        resetGameInfo();
     }
 }
 
@@ -164,6 +165,23 @@ function isNumber():boolean {
 function clearErrorList() {
     let errorList = getById("errors");
     errorList.innerText = "";
+}
+
+/**
+ * Reset game info form if successfully added to list
+ */
+function resetGameInfo() {
+    let titleInput = <HTMLInputElement> getById("title");
+    titleInput.value = "";
+
+    let priceInput = <HTMLInputElement> getById("price");
+    priceInput.value= "";
+
+    let ratingInput = <HTMLSelectElement> getById("rating");
+    ratingInput.selectedIndex = 0;
+
+    let digitalOnly = <HTMLInputElement> getById("online");
+    digitalOnly.checked = false;
 }
 
 /**

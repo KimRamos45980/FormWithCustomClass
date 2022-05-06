@@ -13,6 +13,7 @@ function addVideoGame() {
     if (isAllDataValid()) {
         var game = getVideoGame();
         displayGame(game);
+        resetGameInfo();
     }
 }
 function getVideoGame() {
@@ -103,6 +104,16 @@ function isNumber() {
 function clearErrorList() {
     var errorList = getById("errors");
     errorList.innerText = "";
+}
+function resetGameInfo() {
+    var titleInput = getById("title");
+    titleInput.value = "";
+    var priceInput = getById("price");
+    priceInput.value = "";
+    var ratingInput = getById("rating");
+    ratingInput.selectedIndex = 0;
+    var digitalOnly = getById("online");
+    digitalOnly.checked = false;
 }
 function addBreak() {
     var br = document.createElement("br");
