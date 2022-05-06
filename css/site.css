@@ -48,16 +48,18 @@ h2 {
     padding: 2%;
 }
 
-p {
-    margin-bottom: 1em;
-}
-
 #display {
     margin-left: 20%;
     margin-right: 20%;
     margin-top: 1em;
     border-top-style: solid;
     border-width: .1em;
+}
+
+#errors {
+    margin-top: 0;
+    padding: .5em;
+    color: red;
 }
 
 @media only screen and (max-width: 900px) { 
