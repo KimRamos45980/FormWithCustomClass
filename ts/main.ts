@@ -20,6 +20,7 @@ window.onload = function() {
 
 function addVideoGame() {
     console.log("Add video game was called");
+    clearErrorList();
 
     if(isAllDataValid()) {
         let game = getVideoGame();
@@ -72,7 +73,7 @@ function displayGame(myGame:VideoGame):void {
     // Create paragraph with game details
     let gameInfo = document.createElement("p");
     let gameMediaDisplay = "";
-    if(!myGame.isDigitalOnly){
+    if(myGame.isDigitalOnly){
         gameMediaDisplay = "This is a digital only game.";
     }
     else {
@@ -92,14 +93,22 @@ function displayGame(myGame:VideoGame):void {
 // Add Validation Code
 function isAllDataValid(): boolean {
     
-    if(isTextPresent()) {
+    if(!isInputPresent()) {
+        return false;
+    }
+    if(!isNumber()) {
         return false;
     }
 
     return true;
 }
 
-function isTextPresent(): boolean {
+/**
+ * Checks if Title/Price have an inputed value
+ * Checks if a Rating has been selected
+ * @returns True if all text boxes are filled/rating is selected
+ */
+function isInputPresent(): boolean {
     let textPresent = true;
 
     let titleInput = <HTMLInputElement> getById("title");
@@ -132,6 +141,29 @@ function isTextPresent(): boolean {
     }
 
     return textPresent;
+}
+
+
+function isNumber():boolean {
+    let validNumber = true;
+
+    let priceInput = <HTMLInputElement> getById("price");
+    let priceValue = Number(priceInput.value);
+
+    let errorList = getById("errors");
+    if(isNaN(priceValue)){
+        let priceNotVaild= document.createTextNode("Please enter a number value for price");
+        errorList.appendChild(priceNotVaild);
+        errorList.appendChild(addBreak());
+        validNumber = false;
+    }
+
+    return validNumber;
+}
+
+function clearErrorList() {
+    let errorList = getById("errors");
+    errorList.innerText = "";
 }
 
 /**

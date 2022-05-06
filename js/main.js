@@ -9,6 +9,7 @@ window.onload = function () {
 };
 function addVideoGame() {
     console.log("Add video game was called");
+    clearErrorList();
     if (isAllDataValid()) {
         var game = getVideoGame();
         displayGame(game);
@@ -36,7 +37,7 @@ function displayGame(myGame) {
     gameHeading.innerText = myGame.title;
     var gameInfo = document.createElement("p");
     var gameMediaDisplay = "";
-    if (!myGame.isDigitalOnly) {
+    if (myGame.isDigitalOnly) {
         gameMediaDisplay = "This is a digital only game.";
     }
     else {
@@ -49,12 +50,15 @@ function displayGame(myGame) {
     displayDiv.appendChild(gameInfo);
 }
 function isAllDataValid() {
-    if (isTextPresent()) {
+    if (!isInputPresent()) {
+        return false;
+    }
+    if (!isNumber()) {
         return false;
     }
     return true;
 }
-function isTextPresent() {
+function isInputPresent() {
     var textPresent = true;
     var titleInput = getById("title");
     var titleValue = titleInput.value;
@@ -82,6 +86,23 @@ function isTextPresent() {
         textPresent = false;
     }
     return textPresent;
+}
+function isNumber() {
+    var validNumber = true;
+    var priceInput = getById("price");
+    var priceValue = Number(priceInput.value);
+    var errorList = getById("errors");
+    if (isNaN(priceValue)) {
+        var priceNotVaild = document.createTextNode("Please enter a number value for price");
+        errorList.appendChild(priceNotVaild);
+        errorList.appendChild(addBreak());
+        validNumber = false;
+    }
+    return validNumber;
+}
+function clearErrorList() {
+    var errorList = getById("errors");
+    errorList.innerText = "";
 }
 function addBreak() {
     var br = document.createElement("br");
