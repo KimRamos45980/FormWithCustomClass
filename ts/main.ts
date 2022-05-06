@@ -108,6 +108,9 @@ function isTextPresent(): boolean {
     let priceInput = <HTMLInputElement> getById("price");
     let priceValue = priceInput.value;
 
+    let ratingInput = <HTMLSelectElement> getById("rating");
+    let ratingValue = ratingInput.value;
+
     let errorList = getById("errors");
     if (titleValue == "") {
         let titleMissing = document.createTextNode("Please enter a title");
@@ -118,6 +121,12 @@ function isTextPresent(): boolean {
     if (priceValue == "") {
         let priceMissing = document.createTextNode("Please enter a price");
         errorList.appendChild(priceMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+    if (ratingValue == "Please choose a rating") {
+        let ratingMissing = document.createTextNode("Please select a rating");
+        errorList.appendChild(ratingMissing);
         errorList.appendChild(addBreak());
         textPresent = false;
     }

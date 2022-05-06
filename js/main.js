@@ -60,6 +60,8 @@ function isTextPresent() {
     var titleValue = titleInput.value;
     var priceInput = getById("price");
     var priceValue = priceInput.value;
+    var ratingInput = getById("rating");
+    var ratingValue = ratingInput.value;
     var errorList = getById("errors");
     if (titleValue == "") {
         var titleMissing = document.createTextNode("Please enter a title");
@@ -70,6 +72,12 @@ function isTextPresent() {
     if (priceValue == "") {
         var priceMissing = document.createTextNode("Please enter a price");
         errorList.appendChild(priceMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+    if (ratingValue == "Please choose a rating") {
+        var ratingMissing = document.createTextNode("Please select a rating");
+        errorList.appendChild(ratingMissing);
         errorList.appendChild(addBreak());
         textPresent = false;
     }
