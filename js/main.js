@@ -31,6 +31,22 @@ function getById(id) {
     return document.getElementById(id);
 }
 function displayGame(myGame) {
+    var displayDiv = getById("display");
+    var gameHeading = document.createElement("h2");
+    gameHeading.innerText = myGame.title;
+    var gameInfo = document.createElement("p");
+    var gameMediaDisplay = "";
+    if (!myGame.isDigitalOnly) {
+        gameMediaDisplay = "This is a digital only game.";
+    }
+    else {
+        gameMediaDisplay = "You can buy a physical copy.";
+    }
+    gameInfo.innerText = "".concat(myGame.title, " has a rating of ") +
+        "".concat(myGame.rating, ". It costs $") +
+        "".concat(myGame.price.toFixed(2), ". ").concat(gameMediaDisplay);
+    displayDiv.appendChild(gameHeading);
+    displayDiv.appendChild(gameInfo);
 }
 function isAllDataValid() {
     return true;

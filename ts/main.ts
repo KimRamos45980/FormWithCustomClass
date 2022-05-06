@@ -63,7 +63,30 @@ function getById(id:string) {
 }
 
 function displayGame(myGame:VideoGame):void {
-    // Display video game below the form
+    let displayDiv = getById("display");
+
+    // Create <h2> with game title
+    let gameHeading = document.createElement("h2");
+    gameHeading.innerText = myGame.title;
+    
+    // Create paragraph with game details
+    let gameInfo = document.createElement("p");
+    let gameMediaDisplay = "";
+    if(!myGame.isDigitalOnly){
+        gameMediaDisplay = "This is a digital only game.";
+    }
+    else {
+        gameMediaDisplay = "You can buy a physical copy.";
+    }
+
+    gameInfo.innerText = `${myGame.title} has a rating of ` + 
+                         `${myGame.rating}. It costs $` +
+                         `${myGame.price.toFixed(2)}. ${gameMediaDisplay}`;
+
+    // Add <h2> in the <div id="display">
+    displayDiv.appendChild(gameHeading);
+    // Add <p> of game into
+    displayDiv.appendChild(gameInfo);
 }
 
 // Add Validation Code
