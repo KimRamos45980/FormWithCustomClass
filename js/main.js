@@ -49,5 +49,33 @@ function displayGame(myGame) {
     displayDiv.appendChild(gameInfo);
 }
 function isAllDataValid() {
+    if (isTextPresent()) {
+        return false;
+    }
     return true;
+}
+function isTextPresent() {
+    var textPresent = true;
+    var titleInput = getById("title");
+    var titleValue = titleInput.value;
+    var priceInput = getById("price");
+    var priceValue = priceInput.value;
+    var errorList = getById("errors");
+    if (titleValue == "") {
+        var titleMissing = document.createTextNode("Please enter a title");
+        errorList.appendChild(titleMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+    if (priceValue == "") {
+        var priceMissing = document.createTextNode("Please enter a price");
+        errorList.appendChild(priceMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+    return textPresent;
+}
+function addBreak() {
+    var br = document.createElement("br");
+    return br;
 }

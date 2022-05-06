@@ -90,6 +90,46 @@ function displayGame(myGame:VideoGame):void {
 }
 
 // Add Validation Code
-function isAllDataValid() {
+function isAllDataValid(): boolean {
+    
+    if(isTextPresent()) {
+        return false;
+    }
+
     return true;
+}
+
+function isTextPresent(): boolean {
+    let textPresent = true;
+
+    let titleInput = <HTMLInputElement> getById("title");
+    let titleValue = titleInput.value;
+
+    let priceInput = <HTMLInputElement> getById("price");
+    let priceValue = priceInput.value;
+
+    let errorList = getById("errors");
+    if (titleValue == "") {
+        let titleMissing = document.createTextNode("Please enter a title");
+        errorList.appendChild(titleMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+    if (priceValue == "") {
+        let priceMissing = document.createTextNode("Please enter a price");
+        errorList.appendChild(priceMissing);
+        errorList.appendChild(addBreak());
+        textPresent = false;
+    }
+
+    return textPresent;
+}
+
+/**
+ * Used to add a line break within mulitple functions
+ * @returns a break html element
+ */
+function addBreak():HTMLElement{
+    let br = document.createElement("br");
+    return br;
 }
